@@ -7,7 +7,7 @@ $(EXAMPLE_4_NAME): index.o
 	-L../../../../src/libs/Segments -l$(SEGMENTS_LIB_SHORT_NAME) \
 	$(SDL_LIBS)
 
-	#$(STRIP) $@
+	$(STRIP) $@
 
 index.o:
 	$(MAKE) -C ../../../../src/examples/ConvexPointConstructor index.o

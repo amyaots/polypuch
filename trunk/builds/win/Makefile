@@ -21,15 +21,16 @@ export RENDER_LIB_SHORT_NAME = sdlrender
 export SEGMENTS_LIB_NAME = libsdlsegments.a
 export SEGMENTS_LIB_SHORT_NAME = sdlsegments
 
-export EXAMPLE_1_NAME = simplePolygonAdder.exe
-export EXAMPLE_2_NAME = simplePolygonConstructor.exe
+export EXAMPLE_1_NAME = simplePointAdder.exe
+export EXAMPLE_2_NAME = simplePointConstructor.exe
 export EXAMPLE_3_NAME = simplePointInside.exe
 export EXAMPLE_4_NAME = convexPointConstructor.exe
 export EXAMPLE_5_NAME = convexPointAdder.exe
 export EXAMPLE_6_NAME = convexPointInside.exe
 export EXAMPLE_7_NAME = generalSegmentsAndBeam.exe
+export EXAMPLE_8_NAME = simpleSegmentsAndBeam.exe
 
-all: $(EXAMPLE_1_NAME) $(EXAMPLE_2_NAME) $(EXAMPLE_3_NAME) $(EXAMPLE_4_NAME) $(EXAMPLE_5_NAME) $(EXAMPLE_6_NAME) $(EXAMPLE_7_NAME)
+all: $(EXAMPLE_1_NAME) $(EXAMPLE_2_NAME) $(EXAMPLE_3_NAME) $(EXAMPLE_4_NAME) $(EXAMPLE_5_NAME) $(EXAMPLE_6_NAME) $(EXAMPLE_7_NAME) $(EXAMPLE_8_NAME)
 	@echo "success"
 
 $(EXAMPLE_1_NAME): $(POLYGON_LIB_NAME) $(DRAW_LIB_NAME) $(RENDER_LIB_NAME) $(SEGMENTS_LIB_NAME)
@@ -52,6 +53,9 @@ $(EXAMPLE_6_NAME): $(POLYGON_LIB_NAME) $(DRAW_LIB_NAME) $(RENDER_LIB_NAME) $(SEG
 
 $(EXAMPLE_7_NAME): $(POLYGON_LIB_NAME) $(DRAW_LIB_NAME) $(RENDER_LIB_NAME) $(SEGMENTS_LIB_NAME)
 	$(MAKE) -C examples $(EXAMPLE_7_NAME)
+
+$(EXAMPLE_8_NAME): $(POLYGON_LIB_NAME) $(DRAW_LIB_NAME) $(RENDER_LIB_NAME) $(SEGMENTS_LIB_NAME)
+	$(MAKE) -C examples $(EXAMPLE_8_NAME)
 
 $(POLYGON_LIB_NAME):
 	$(MAKE) -C ../../src/libs $(POLYGON_LIB_NAME)

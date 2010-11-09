@@ -5,4 +5,4 @@ usage:
 	point_radius          (default 3)
 	segment_width         (default 2)
 Set 480x360:32 video
-100 in simple polygon
+101 in simple polygon

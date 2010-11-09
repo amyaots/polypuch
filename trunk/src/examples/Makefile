@@ -6,3 +6,4 @@ clean:
 	$(MAKE) -C ConvexPointAdder clean
 	$(MAKE) -C ConvexPointInside clean
 	$(MAKE) -C GeneralSegmentsAndBeam clean
+	$(MAKE) -C SimpleSegmentsAndBeam clean

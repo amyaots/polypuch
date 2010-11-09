@@ -18,7 +18,7 @@ using namespace std;
 #include <SDL/Line/line.hpp>
 using namespace sdl;
 
-#include <Segments/General/general.hpp>
+#include <Segments/Simple/simple.hpp>
 using namespace segments;
 
 #include <Render/Polygon/polygon.hpp>
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
 	Ui32 yellow = polygonRender.getRGBColor(255, 255, 0);
 
 	//добавим кучу отрезков
-	segments::General *segments = new segments::General();
+	segments::Simple *segments = new segments::Simple();
 
 	SegmentsOptions *segOpt = new SegmentsOptions();
 	segOpt->pointColor = green;
