@@ -1,6 +1,6 @@
-$(EXAMPLE_5_NAME): index.o
+$(EXAMPLE_8_NAME): index.o
 	$(CC) $(CC_FLAGS) -o $@ \
-	../../../../src/examples/ConvexPointAdder/index.o \
+	../../../../src/examples/SimpleSegmentsAndBeam/index.o \
 	-L../../../../src/libs/Render -l$(RENDER_LIB_SHORT_NAME) \
 	-L../../../../src/libs/Polygon -l$(POLYGON_LIB_SHORT_NAME) \
 	-L../../../../src/libs/SDL -l$(DRAW_LIB_SHORT_NAME) \
@@ -10,7 +10,7 @@ $(EXAMPLE_5_NAME): index.o
 	$(STRIP) $@
 
 index.o:
-	$(MAKE) -C ../../../../src/examples/ConvexPointAdder index.o
+	$(MAKE) -C ../../../../src/examples/SimpleSegmentsAndBeam index.o
 
 clean:
-	$(CLEAN) $(EXAMPLE_5_NAME)
+	$(CLEAN) $(EXAMPLE_8_NAME)

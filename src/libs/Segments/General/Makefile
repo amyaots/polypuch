@@ -8,4 +8,6 @@ general_beam.o: general_beam.cpp
 	$(CC) $(CC_FLAGS) -c -o $@ $^ $(SDL_CFLAGS)
 
 clean:
+	$(CLEAN) general.a
 	$(CLEAN) general.o
+	$(CLEAN) general_beam.o

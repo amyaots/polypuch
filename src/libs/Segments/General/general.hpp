@@ -25,7 +25,7 @@ namespace segments {
     typedef unordered_map<Segment, SegmentOptions> Segments;
 
     class General {
-    private:
+    protected:
         Segments segments;
 
     public:
@@ -45,7 +45,7 @@ namespace segments {
                 Ui16 segmentWidth
                 ) const;
 
-        virtual Segment beam(
+        Segment beam(
                 Point &currentPoint, f32 &vX, f32 &vY,
                 const Point &leftTop, const Point &rightTop,
                 const Point &rightDown, const Point &leftDown,

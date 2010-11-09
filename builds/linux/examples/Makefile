@@ -19,7 +19,15 @@ $(EXAMPLE_6_NAME):
 $(EXAMPLE_7_NAME):
 	$(MAKE) -C GeneralSegmentsAndBeam $(EXAMPLE_7_NAME)
 
+$(EXAMPLE_8_NAME):
+	$(MAKE) -C SimpleSegmentsAndBeam $(EXAMPLE_8_NAME)
+
 clean:
 	$(MAKE) -C SimplePointAdder clean
 	$(MAKE) -C SimplePointConstructor clean
 	$(MAKE) -C SimplePointInside clean
+	$(MAKE) -C ConvexPointConstructor clean
+	$(MAKE) -C ConvexPointAdder clean
+	$(MAKE) -C ConvexPointInside clean
+	$(MAKE) -C GeneralSegmentsAndBeam clean
+	$(MAKE) -C SimpleSegmentsAndBeam clean
