@@ -1,5 +1,5 @@
-polygon.o: polygon.cpp polygon.hpp
-	$(CC) $(CC_FLAGS) -c -o $@ polygon.cpp $(SDL_CFLAGS)
+polygon.o: polygon.cpp
+	$(CC) $(CC_FLAGS) -c -o $@ $^ $(SDL_CFLAGS)
 
 clean:
 	$(CLEAN) polygon.o

@@ -5,7 +5,7 @@
 namespace polygon {
 
 	General::General() {
-		this->pts = new vector<Point > ();
+		this->pts = new vector<Point> ();
 	}
 
 	General::~General() {
@@ -13,7 +13,7 @@ namespace polygon {
 	}
 
 	General::General(const vector<Point> &pts) {
-		this->pts = new vector<Point > ();
+		this->pts = new vector<Point> ();
 		vector<Point>::const_iterator it;
 		for (it = pts.begin(); it != pts.end(); it++) {
 			vector<Point>::iterator findit;
@@ -25,7 +25,7 @@ namespace polygon {
 	}
 
 	General::General(const General &obj) {
-		this->pts = new vector<Point > ();
+		this->pts = new vector<Point> ();
 		*(this->pts) = *(obj.pts);
 	}
 
@@ -90,7 +90,7 @@ namespace polygon {
 		vector<Point>::const_iterator it;
 		Point prevPoint = *(this->pts->begin());
 		Point currentPoint;
-		
+
 		if (drawLines) {
 			for (it = this->pts->begin() + 1; it != this->pts->end(); it++) {
 				currentPoint = *it;

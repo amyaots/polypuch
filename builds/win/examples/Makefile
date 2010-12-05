@@ -22,6 +22,15 @@ $(EXAMPLE_7_NAME):
 $(EXAMPLE_8_NAME):
 	$(MAKE) -C SimpleSegmentsAndBeam $(EXAMPLE_8_NAME)
 
+$(EXAMPLE_9_NAME):
+	$(MAKE) -C GeneralPointInside $(EXAMPLE_9_NAME)
+
+$(EXAMPLE_10_NAME):
+	$(MAKE) -C GeneralCurvesGeneral $(EXAMPLE_10_NAME)
+
+$(EXAMPLE_11_NAME):
+	$(MAKE) -C GeneralCurvesErmit $(EXAMPLE_11_NAME)
+
 clean:
 	$(MAKE) -C SimplePointAdder clean
 	$(MAKE) -C SimplePointConstructor clean
@@ -31,3 +40,6 @@ clean:
 	$(MAKE) -C ConvexPointInside clean
 	$(MAKE) -C GeneralSegmentsAndBeam clean
 	$(MAKE) -C SimpleSegmentsAndBeam clean
+	$(MAKE) -C GeneralPointInside clean
+	$(MAKE) -C GeneralCurvesGeneral clean
+	$(MAKE) -C GeneralCurvesErmit clean

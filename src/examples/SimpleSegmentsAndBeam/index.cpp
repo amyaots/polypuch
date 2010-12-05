@@ -21,7 +21,7 @@ using namespace sdl;
 #include <Segments/Simple/simple.hpp>
 using namespace segments;
 
-#include <Render/Polygon/polygon.hpp>
+#include <Render/Segments/segments.hpp>
 using namespace render;
 
 #define SCREEN_WIDTH 480
@@ -70,9 +70,9 @@ int main(int argc, char *argv[]) {
 
 	//<инициализация sdl>
 
-	Polygon polygonRender(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BITS_PER_PIXEL);
-	polygonRender.setBackground((currentDir + string("bg.png")).c_str());
-	polygonRender.setIcon((currentDir + string("icon.png")).c_str(), "Simple Polygon Render", "Simple Polygon Render");
+	render::Segments segmentsRender(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BITS_PER_PIXEL);
+	segmentsRender.setBackground((currentDir + string("bg.png")).c_str());
+	segmentsRender.setIcon((currentDir + string("icon.png")).c_str(), "Simple Polygon Render", "Simple Polygon Render");
 
 	//</инициализация sdl>
 
@@ -85,10 +85,10 @@ int main(int argc, char *argv[]) {
 	Ui32 refreshTime = 1000 / MAX_FPS;
 
 	//цвета
-	Ui32 black = polygonRender.getRGBColor(0, 0, 0);
-	Ui32 green = polygonRender.getRGBColor(0, 255, 0);
-	Ui32 red = polygonRender.getRGBColor(255, 0, 0);
-	Ui32 yellow = polygonRender.getRGBColor(255, 255, 0);
+	Ui32 black = segmentsRender.getRGBColor(0, 0, 0);
+	Ui32 green = segmentsRender.getRGBColor(0, 255, 0);
+	Ui32 red = segmentsRender.getRGBColor(255, 0, 0);
+	Ui32 yellow = segmentsRender.getRGBColor(255, 255, 0);
 
 	//добавим кучу отрезков
 	segments::Simple *segments = new segments::Simple();
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 	segOpt->segmentColor = black;
 	segOpt->segmentWidth = segment_width;
 
-	polygonRender.add(segments, segOpt);
+	segmentsRender.add(segments, segOpt);
 
 	//добавим еще одну кучу отрезков, но другого цвета
 	//это будут лучики
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
 	segOptBeams->segmentColor = yellow;
 	segOptBeams->segmentWidth = segment_width;
 
-	polygonRender.add(segmentsBeams, segOptBeams);
+	segmentsRender.add(segmentsBeams, segOptBeams);
 
 	//</используемые переменные>
 
@@ -143,7 +143,7 @@ int main(int argc, char *argv[]) {
 			secondPoint.second = SQUARE_MARGIN + rand() % (SCREEN_HEIGHT - 2 * SQUARE_MARGIN);
 
 			if(segments->add(firstPoint, secondPoint)) {
-				polygonRender.reDraw();
+				segmentsRender.reDraw();
 				SDL_Delay(creation_visualization_delay);
 				i++;
 			}
@@ -203,7 +203,7 @@ int main(int argc, char *argv[]) {
 			}
 		} else {
 			segmentsBeams->add(segments->beam(currentPoint, vX, vY, leftTop, rightTop, rightDown, leftDown, ignore));
-			polygonRender.reDraw();
+			segmentsRender.reDraw();
 			SDL_Delay(beams_visualization_delay);
 			i++;
 

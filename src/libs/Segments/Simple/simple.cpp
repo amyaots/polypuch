@@ -41,12 +41,7 @@ namespace segments {
 		this->add(s.first, s.second);
 	}
 
-	Simple::Simple(const vector<Segment> &segments) {
-		vector<Segment>::const_iterator it;
-		Segment currentSegment;
-		for (it = segments.begin(); it != segments.end(); it++) {
-			currentSegment = *it;
-			this->add(currentSegment.first, currentSegment.second);
-		}
+	Simple::~Simple() {
+		this->~General();
 	}
 }

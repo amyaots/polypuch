@@ -7,11 +7,12 @@ namespace polygon {
 
     class Simple : public General {
     public:
-        Simple(){}
-        Simple(const vector<Point> &pts);
+        Simple() : General() {}
+        ~Simple();
+        Simple(const vector<Point> &pts) : General(pts) {}
 
         bool add(const Point &p);
-        virtual bool have(const Point &p) const;
+        bool have(const Point &p) const;
     };
 }
 

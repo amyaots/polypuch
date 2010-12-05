@@ -21,7 +21,7 @@ using namespace sdl;
 #include <Segments/General/general.hpp>
 using namespace segments;
 
-#include <Render/Polygon/polygon.hpp>
+#include <Render/Segments/segments.hpp>
 using namespace render;
 
 #define SCREEN_WIDTH 480
@@ -70,9 +70,9 @@ int main(int argc, char *argv[]) {
 
 	//<инициализация sdl>
 
-	Polygon polygonRender(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BITS_PER_PIXEL);
-	polygonRender.setBackground((currentDir + string("bg.png")).c_str());
-	polygonRender.setIcon((currentDir + string("icon.png")).c_str(), "Simple Polygon Render", "Simple Polygon Render");
+	render::Segments segmentRender(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BITS_PER_PIXEL);
+	segmentRender.setBackground((currentDir + string("bg.png")).c_str());
+	segmentRender.setIcon((currentDir + string("icon.png")).c_str(), "Simple Polygon Render", "Simple Polygon Render");
 
 	//</инициализация sdl>
 
@@ -85,10 +85,10 @@ int main(int argc, char *argv[]) {
 	Ui32 refreshTime = 1000 / MAX_FPS;
 
 	//цвета
-	Ui32 black = polygonRender.getRGBColor(0, 0, 0);
-	Ui32 green = polygonRender.getRGBColor(0, 255, 0);
-	Ui32 red = polygonRender.getRGBColor(255, 0, 0);
-	Ui32 yellow = polygonRender.getRGBColor(255, 255, 0);
+	Ui32 black = segmentRender.getRGBColor(0, 0, 0);
+	Ui32 green = segmentRender.getRGBColor(0, 255, 0);
+	Ui32 red = segmentRender.getRGBColor(255, 0, 0);
+	Ui32 yellow = segmentRender.getRGBColor(255, 255, 0);
 
 	//добавим кучу отрезков
 	segments::General *segments = new segments::General();
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 	segOpt->segmentColor = black;
 	segOpt->segmentWidth = segment_width;
 
-	polygonRender.add(segments, segOpt);
+	segmentRender.add(segments, segOpt);
 
 	//добавим еще одну кучу отрезков, но другого цвета
 	//это будут лучики
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
 	segOptBeams->segmentColor = yellow;
 	segOptBeams->segmentWidth = segment_width;
 
-	polygonRender.add(segmentsBeams, segOptBeams);
+	segmentRender.add(segmentsBeams, segOptBeams);
 
 	//</используемые переменные>
 
@@ -143,7 +143,7 @@ int main(int argc, char *argv[]) {
 			secondPoint.second = SQUARE_MARGIN + rand() % (SCREEN_HEIGHT - 2 * SQUARE_MARGIN);
 
 			if(segments->add(firstPoint, secondPoint)) {
-				polygonRender.reDraw();
+				segmentRender.reDraw();
 				SDL_Delay(creation_visualization_delay);
 				i++;
 			}
@@ -203,7 +203,7 @@ int main(int argc, char *argv[]) {
 			}
 		} else {
 			segmentsBeams->add(segments->beam(currentPoint, vX, vY, leftTop, rightTop, rightDown, leftDown, ignore));
-			polygonRender.reDraw();
+			segmentRender.reDraw();
 			SDL_Delay(beams_visualization_delay);
 			i++;
 
