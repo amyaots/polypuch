@@ -33,13 +33,15 @@ namespace segments {
 		vector<Segment> newIgnore;
 
 		vector<Segment>::iterator vt;
-		cout << "ignore list" << endl;
+		//cout << "ignore list" << endl;
+		/*
 		for(vt = ignore.begin(); vt != ignore.end(); vt++) {
 			print((*vt).first);
 			print((*vt).second);
 		}
 		cout << endl;
-
+		*/
+		
 		Pi width = rightTop.first - leftTop.first;
 		Pi height = leftDown.second - leftTop.second;
 
@@ -103,11 +105,11 @@ namespace segments {
 		Point intersection;
 		SegmentOptions currentSegmentOptions;
 
-		print(currentPoint);
-		print(endPoint);
-		print(leftTop);
-		print(rightTop);
-		cout << (segmentsIntersect(leftTop, rightTop, currentPoint, endPoint, intersection)) << endl << endl;
+		//print(currentPoint);
+		//print(endPoint);
+		//print(leftTop);
+		//print(rightTop);
+		//cout << (segmentsIntersect(leftTop, rightTop, currentPoint, endPoint, intersection)) << endl << endl;
 		if (
 				find(ignore.begin(), ignore.end(), Segment(leftTop, rightTop)) == ignore.end() &&
 				segmentsIntersect(leftTop, rightTop, currentPoint, endPoint, intersection)
@@ -125,11 +127,11 @@ namespace segments {
 			endPoint = intersection;
 		}
 
-		print(currentPoint);
-		print(endPoint);
-		print(rightTop);
-		print(rightDown);
-		cout << (segmentsIntersect(rightTop, rightDown, currentPoint, endPoint, intersection)) << endl << endl;
+		//print(currentPoint);
+		//print(endPoint);
+		//print(rightTop);
+		//print(rightDown);
+		//cout << (segmentsIntersect(rightTop, rightDown, currentPoint, endPoint, intersection)) << endl << endl;
 		if (
 				find(ignore.begin(), ignore.end(), Segment(rightTop, rightDown)) == ignore.end() &&
 				segmentsIntersect(rightTop, rightDown, currentPoint, endPoint, intersection)
@@ -147,11 +149,11 @@ namespace segments {
 			endPoint = intersection;
 		}
 
-		print(currentPoint);
-		print(endPoint);
-		print(rightDown);
-		print(leftDown);
-		cout << (segmentsIntersect(rightDown, leftDown, currentPoint, endPoint, intersection)) << endl << endl;
+		//print(currentPoint);
+		//print(endPoint);
+		//print(rightDown);
+		//print(leftDown);
+		//cout << (segmentsIntersect(rightDown, leftDown, currentPoint, endPoint, intersection)) << endl << endl;
 		if (
 				find(ignore.begin(), ignore.end(), Segment(rightDown, leftDown)) == ignore.end() &&
 				segmentsIntersect(rightDown, leftDown, currentPoint, endPoint, intersection)
@@ -169,11 +171,11 @@ namespace segments {
 			endPoint = intersection;
 		}
 
-		print(currentPoint);
-		print(endPoint);
-		print(leftDown);
-		print(leftTop);
-		cout << (segmentsIntersect(leftDown, leftTop, currentPoint, endPoint, intersection)) << endl << endl;
+		//print(currentPoint);
+		//print(endPoint);
+		//print(leftDown);
+		//print(leftTop);
+		//cout << (segmentsIntersect(leftDown, leftTop, currentPoint, endPoint, intersection)) << endl << endl;
 		if (
 				find(ignore.begin(), ignore.end(), Segment(leftDown, leftTop)) == ignore.end() &&
 				segmentsIntersect(leftDown, leftTop, currentPoint, endPoint, intersection)
@@ -191,8 +193,8 @@ namespace segments {
 			endPoint = intersection;
 		}
 
-		print(endPoint);
-		cout << endl;
+		//print(endPoint);
+		//cout << endl;
 
 		//пересекаем текущий отрезок со всеми отрезками
 		//в результате endPoint становится в ту точку, в которую попал бы луч

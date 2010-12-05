@@ -22,7 +22,6 @@ using namespace sdl;
 using namespace polygon;
 
 #include <Render/Polygon/polygon.hpp>
-using namespace render;
 
 #define SCREEN_WIDTH 480
 #define SCREEN_HEIGHT 360
@@ -104,7 +103,6 @@ int main(int argc, char *argv[]) {
 
 	//добавим полигон
 	Convex *polyConvex = new Convex(random_points);
-	cout << *polyConvex << endl << endl;
 
 	PolygonOptions *polyConvexOpt = new PolygonOptions();
 	polyConvexOpt->pointColor = green;
@@ -116,7 +114,7 @@ int main(int argc, char *argv[]) {
 	polygonRender.add(polyConvex, polyConvexOpt);
 
 	//нарисуем все точки
-	General *polyGeneral = new General(random_points);
+	polygon::General *polyGeneral = new polygon::General(random_points);
 
 	PolygonOptions *polyGeneralOpt = new PolygonOptions();
 	polyGeneralOpt->pointColor = green;

@@ -33,140 +33,140 @@ using namespace render;
 
 int main(int argc, char *argv[]) {
 
-	if (argc < 1) {
-		return 1;
-	}
+    if (argc < 1) {
+        return 1;
+    }
 
-	Ui16 count_points = 20;
-	Ui16 visualization_delay = 300;
-	Ui16 point_radius = 3;
-	Ui16 segment_width = 2;
+    Ui16 count_points = 20;
+    Ui16 visualization_delay = 300;
+    Ui16 point_radius = 3;
+    Ui16 segment_width = 2;
 
-	if (argc != 5) {
-		cout << "usage:" << endl;
-		cout << "\tpath/to/binary" << endl;
-		cout << "\tcount_points          (default 20)" << endl;
-		cout << "\tvisualization_delay   (default 300)" << endl;
-		cout << "\tpoint_radius          (default 3)" << endl;
-		cout << "\tsegment_width         (default 2)" << endl;
-	} else {
-		count_points = (Ui16) atoi(argv[1]);
-		visualization_delay = (Ui16) atoi(argv[2]);
-		point_radius = (Ui16) atoi(argv[3]);
-		segment_width = (Ui16) atoi(argv[4]);
-	}
+    if (argc != 5) {
+        cout << "usage:" << endl;
+        cout << "\tpath/to/binary" << endl;
+        cout << "\tcount_points          (default 20)" << endl;
+        cout << "\tvisualization_delay   (default 300)" << endl;
+        cout << "\tpoint_radius          (default 3)" << endl;
+        cout << "\tsegment_width         (default 2)" << endl;
+    } else {
+        count_points = (Ui16) atoi(argv[1]);
+        visualization_delay = (Ui16) atoi(argv[2]);
+        point_radius = (Ui16) atoi(argv[3]);
+        segment_width = (Ui16) atoi(argv[4]);
+    }
 
-	//первый аргумент всегда представляет собой абсолютный путь к нашему бинарнику.
-	string currentBinary(argv[0]);
-	string currentDir = currentBinary.substr(0, currentBinary.find_last_of("/") + 1);
+    //первый аргумент всегда представляет собой абсолютный путь к нашему бинарнику.
+    string currentBinary(argv[0]);
+    string currentDir = currentBinary.substr(0, currentBinary.find_last_of("/") + 1);
 
-	//<инициализация sdl>
+    //<инициализация sdl>
 
-	Polygon polygonRender(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BITS_PER_PIXEL);
-	polygonRender.setBackground((currentDir + string("bg.png")).c_str());
-	polygonRender.setIcon((currentDir + string("icon.png")).c_str(), "Simple Polygon Render", "Simple Polygon Render");
+    Polygon polygonRender(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BITS_PER_PIXEL);
+    polygonRender.setBackground((currentDir + string("bg.png")).c_str());
+    polygonRender.setIcon((currentDir + string("icon.png")).c_str(), "Simple Polygon Render", "Simple Polygon Render");
 
-	//</инициализация sdl>
+    //</инициализация sdl>
 
-	//<используемые переменные>
+    //<используемые переменные>
 
-	bool go = true;
-	SDL_Event mainEvent;
-	SDL_Event* mainEventPointer = &mainEvent;
+    bool go = true;
+    SDL_Event mainEvent;
+    SDL_Event* mainEventPointer = &mainEvent;
 
-	Ui32 refreshTime = 1000 / MAX_FPS;
+    Ui32 refreshTime = 1000 / MAX_FPS;
 
-	//цвета
-	Ui32 black = polygonRender.getRGBColor(0, 0, 0);
-	Ui32 green = polygonRender.getRGBColor(0, 255, 0);
-	Ui32 red = polygonRender.getRGBColor(255, 0, 0);
+    //цвета
+    Ui32 black = polygonRender.getRGBColor(0, 0, 0);
+    Ui32 green = polygonRender.getRGBColor(0, 255, 0);
+    Ui32 red = polygonRender.getRGBColor(255, 0, 0);
 
-	//добавим полигон
-	Convex *poly = new Convex();
+    //добавим полигон
+    Convex *poly = new Convex();
 
-	PolygonOptions *polyOpt = new PolygonOptions();
-	polyOpt->pointColor = green;
-	polyOpt->pointRadius = point_radius;
-	polyOpt->segmentColor = black;
-	polyOpt->segmentWidth = segment_width;
-	polyOpt->drawLines = true;
+    PolygonOptions *polyOpt = new PolygonOptions();
+    polyOpt->pointColor = green;
+    polyOpt->pointRadius = point_radius;
+    polyOpt->segmentColor = black;
+    polyOpt->segmentWidth = segment_width;
+    polyOpt->drawLines = true;
 
-	polygonRender.add(poly, polyOpt);
+    polygonRender.add(poly, polyOpt);
 
-	//добавим текущую точку
-	Point *redPoint = new Point();
+    //добавим текущую точку
+    Point *redPoint = new Point();
 
-	PointOptions *redPointOpt = new PointOptions();
-	redPointOpt->pointColor = red;
-	redPointOpt->pointRadius = point_radius;
+    PointOptions *redPointOpt = new PointOptions();
+    redPointOpt->pointColor = red;
+    redPointOpt->pointRadius = point_radius;
 
-	polygonRender.add(redPoint, redPointOpt);
+    polygonRender.add(redPoint, redPointOpt);
 
-	//</используемые переменные>
+    //</используемые переменные>
 
-	//<цикл рендеринга>
-	//включаем работу алгоритма в стандартный цикл sdl
-	//во время работы алгоритма приложение будет отзываться на любые системные события
-	Ui16 i;
-	srand(time(NULL));
-	i = 0;
-	while (go) {
-		if (SDL_PollEvent(mainEventPointer)) {
-			if (mainEventPointer->type == SDL_QUIT) {
-				go = false;
-			} else if (mainEventPointer->type == SDL_KEYDOWN) {
-				switch (mainEventPointer->key.keysym.sym) {
-					case SDLK_ESCAPE:
-						go = false;
-						break;
-				}
-			} else {
-			}
-		} else {
-			redPoint->first = 5 + rand() % (SCREEN_WIDTH - 10);
-			redPoint->second = 5 + rand() % (SCREEN_HEIGHT - 10);
-			redPointOpt->pointRadius = point_radius;
-			polygonRender.reDraw();
-			SDL_Delay(visualization_delay);
-			poly->add(*redPoint);
-			redPointOpt->pointRadius = 0;
-			polygonRender.reDraw();
-			SDL_Delay(visualization_delay);
-			i++;
+    //<цикл рендеринга>
+    //включаем работу алгоритма в стандартный цикл sdl
+    //во время работы алгоритма приложение будет отзываться на любые системные события
+    Ui16 i;
+    srand(time(NULL));
+    i = 0;
+    while (go) {
+        if (SDL_PollEvent(mainEventPointer)) {
+            if (mainEventPointer->type == SDL_QUIT) {
+                go = false;
+            } else if (mainEventPointer->type == SDL_KEYDOWN) {
+                switch (mainEventPointer->key.keysym.sym) {
+                    case SDLK_ESCAPE:
+                        go = false;
+                        break;
+                }
+            } else {
+            }
+        } else {
+            redPoint->first = 5 + rand() % (SCREEN_WIDTH - 10);
+            redPoint->second = 5 + rand() % (SCREEN_HEIGHT - 10);
+            redPointOpt->pointRadius = point_radius;
+            polygonRender.reDraw();
+            SDL_Delay(visualization_delay);
+            poly->add(*redPoint);
+            redPointOpt->pointRadius = 0;
+            polygonRender.reDraw();
+            SDL_Delay(visualization_delay);
+            i++;
 
-			if (i > count_points) {
-				go = false;
-			}
-		}
-	}
-	//</цикл рендеринга>
+            if (i > count_points) {
+                go = false;
+            }
+        }
+    }
+    //</цикл рендеринга>
 
-	cout << poly->getSize() << " in simple polygon" << endl;
+    cout << poly->getSize() << " in simple polygon" << endl;
 
-	//<цикл рендеринга>
-	go = true;
-	while (go) {
-		if (SDL_PollEvent(mainEventPointer)) {
-			if (mainEventPointer->type == SDL_QUIT) {
-				go = false;
-			} else if (mainEventPointer->type == SDL_KEYDOWN) {
-				switch (mainEventPointer->key.keysym.sym) {
-					case SDLK_ESCAPE:
-						go = false;
-						break;
-				}
-			} else {
-			}
-		} else {
-			SDL_Delay(refreshTime);
-		}
-	}
-	//</цикл рендеринга>
+    //<цикл рендеринга>
+    go = true;
+    while (go) {
+        if (SDL_PollEvent(mainEventPointer)) {
+            if (mainEventPointer->type == SDL_QUIT) {
+                go = false;
+            } else if (mainEventPointer->type == SDL_KEYDOWN) {
+                switch (mainEventPointer->key.keysym.sym) {
+                    case SDLK_ESCAPE:
+                        go = false;
+                        break;
+                }
+            } else {
+            }
+        } else {
+            SDL_Delay(refreshTime);
+        }
+    }
+    //</цикл рендеринга>
 
-	delete poly;
-	delete polyOpt;
-	delete redPoint;
-	delete redPointOpt;
+    delete poly;
+    delete polyOpt;
+    delete redPoint;
+    delete redPointOpt;
 
-	return 0;
+    return 0;
 }

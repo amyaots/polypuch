@@ -1,11 +1,11 @@
-$(POLYGON_LIB_NAME): general.o simple.a convex.a
-	$(CP)   ./General/general.o ./
+$(POLYGON_LIB_NAME): general.a simple.a convex.a
+	$(UNAR) ./General/general.a
 	$(UNAR) ./Simple/simple.a
 	$(UNAR) ./Convex/convex.a
 	$(AR) $@ *.o
 
-general.o:
-	$(MAKE) -C General general.o
+general.a:
+	$(MAKE) -C General general.a
 
 simple.a:
 	$(MAKE) -C Simple simple.a

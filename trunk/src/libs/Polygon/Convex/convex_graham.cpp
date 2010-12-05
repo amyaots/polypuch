@@ -5,137 +5,139 @@ using namespace boost;
 
 namespace polygon {
 
-	typedef unordered_map<Point, f32> angleHash;
+    typedef unordered_map<Point, f32> angleHash;
 
-	inline void print(const Point &a) {
-		cout << "(" << a.first << ", " << a.second << ")" << endl;
-	}
+    inline void print(const Point &a) {
+        cout << "(" << a.first << ", " << a.second << ")" << endl;
+    }
 
-	//получаем тангенс угла между вектором (from, to) и осью х
-	f32 Convex::getAngle(Point from, Point to) {
-		Si16 dX = to.first - from.first;
-		if (dX) {
-			return ((f32) to.second - from.second) / dX;
-		} else {
-			return f32_Max;
-		}
-	}
+    //получаем тангенс угла между вектором (from, to) и осью х
 
-	//правая или левая тройка из векторов (b, a), (b, c) и ((b, a) x (b, c))
-	bool Convex::determinantSignum(const Point &a, const Point &b, const Point &c) {
-		return (((a.first - b.first) * (c.second - b.second) - (c.first - b.first) * (a.second - b.second)) >= 0);
-	}
+    inline f32 getAngle(Point from, Point to) {
+        Si16 dX = to.first - from.first;
+        if (dX) {
+            return ((f32) to.second - from.second) / dX;
+        } else {
+            return f32_Max;
+        }
+    }
 
-	//предикат сравнения точек по угловому приницпу
+    //правая или левая тройка из векторов (b, a), (b, c) и ((b, a) x (b, c))
 
-	class PolarAngleLess {
-	private:
-		angleHash angles;
-		Point start;
+    inline bool determinantSignum(const Point &a, const Point &b, const Point &c) {
+        return (((a.first - b.first) * (c.second - b.second) - (c.first - b.first) * (a.second - b.second)) >= 0);
+    }
 
-	public:
+    //предикат сравнения точек по угловому приницпу
 
-		PolarAngleLess(const Point &start, const angleHash &angles) {
-			this->start = start;
-			this->angles = angles;
-		}
+    class PolarAngleLess {
+    private:
+        angleHash angles;
+        Point start;
 
-		//a наблюжается из точки старт под меньшим углом чем б
+    public:
 
-		bool operator()(const Point &a, const Point &b) {
-			return (this->angles[a]) < (this->angles[b]);
-		}
-	};
+        PolarAngleLess(const Point &start, const angleHash &angles) {
+            this->start = start;
+            this->angles = angles;
+        }
 
-	void Convex::graham(const vector<Point> &src) {
+        //a наблюжается из точки старт под меньшим углом чем б
 
-		vector<Point> srcCopy = src;
+        bool operator()(const Point &a, const Point &b) {
+            return (this->angles[a]) < (this->angles[b]);
+        }
+    };
 
-		if (srcCopy.size() < 4) {
-			*(this->pts) = srcCopy;
-			return;
-		}
+    void Convex::graham(const vector<Point> &src) {
 
-		//выбираем одну из самых левых по иксу точек
-		//тангенс угла между осью ох и вектором (стартовая точка, текущая точка) будет от -инф до + инф
-		vector<Point>::iterator it;
-		Pi smalestX = Pi_Max;
-		Pi smalestY = Pi_Max;
-		Point smalestPoint, current;
-		vector<Point>::iterator smalestIt;
-		for (it = srcCopy.begin(); it != srcCopy.end(); it++) {
-			current = *it;
-			if (smalestX > current.first) {
-				smalestX = current.first;
-				smalestY = current.second;
-				smalestPoint = current;
-				smalestIt = it;
-			} else if(smalestX == current.first) {
-				if (smalestY > current.second) {
-					smalestX = current.first;
-					smalestY = current.second;
-					smalestPoint = current;
-					smalestIt = it;
-				}
-			}
-		}
-		srcCopy.erase(smalestIt);
+        vector<Point> srcCopy = src;
 
-		angleHash angles;
+        if (srcCopy.size() < 4) {
+            *(this->pts) = srcCopy;
+            return;
+        }
 
-		//посчитаем углы
-		Point currentPoint;
-		Si16 dX;
-		for (it = srcCopy.begin(); it != srcCopy.end(); it++) {
-			currentPoint = *it;
-			angles[currentPoint] = getAngle(smalestPoint, currentPoint);
-		}
+        //выбираем одну из самых левых по иксу точек
+        //тангенс угла между осью ох и вектором (стартовая точка, текущая точка) будет от -инф до + инф
+        vector<Point>::iterator it;
+        Pi smalestX = Pi_Max;
+        Pi smalestY = Pi_Max;
+        Point smalestPoint, current;
+        vector<Point>::iterator smalestIt;
+        for (it = srcCopy.begin(); it != srcCopy.end(); it++) {
+            current = *it;
+            if (smalestX > current.first) {
+                smalestX = current.first;
+                smalestY = current.second;
+                smalestPoint = current;
+                smalestIt = it;
+            } else if (smalestX == current.first) {
+                if (smalestY > current.second) {
+                    smalestX = current.first;
+                    smalestY = current.second;
+                    smalestPoint = current;
+                    smalestIt = it;
+                }
+            }
+        }
+        srcCopy.erase(smalestIt);
 
-		PolarAngleLess predicate(smalestPoint, angles);
-		sort(srcCopy.begin(), srcCopy.end(), predicate);
-		//от дубликаты точек могут быть гадкие баги
-		//лучше мы их после сортировки все удалим за о(н)
-		srcCopy.erase(unique(srcCopy.begin(), srcCopy.end()), srcCopy.end());
+        angleHash angles;
 
-		//for_each(srcCopy.begin(), srcCopy.end(), print);
-		//cout << endl;
+        //посчитаем углы
+        Point currentPoint;
+        Si16 dX;
+        for (it = srcCopy.begin(); it != srcCopy.end(); it++) {
+            currentPoint = *it;
+            angles[currentPoint] = getAngle(smalestPoint, currentPoint);
+        }
 
-		//добавляем стартовую и следующую за ней две точку
-		//очевидно что это можно сделать (точки не могут сопасть друг с другом)
+        PolarAngleLess predicate(smalestPoint, angles);
+        sort(srcCopy.begin(), srcCopy.end(), predicate);
+        //от дубликаты точек могут быть гадкие баги
+        //лучше мы их после сортировки все удалим за о(н)
+        srcCopy.erase(unique(srcCopy.begin(), srcCopy.end()), srcCopy.end());
 
-		this->pts->push_back(smalestPoint);
-		this->pts->push_back(*(srcCopy.begin()));
-		this->pts->push_back(*(srcCopy.begin() + 1));
+        //for_each(srcCopy.begin(), srcCopy.end(), print);
+        //cout << endl;
 
-		Point nextPoint;
-		Point prevPoint;
-		vector<Point>::iterator jt;
-		for (it = srcCopy.begin() + 2; it != srcCopy.end(); it++) {
-			currentPoint = *it;
+        //добавляем стартовую и следующую за ней две точку
+        //очевидно что это можно сделать (точки не могут сопасть друг с другом)
 
-			this->pts->push_back(currentPoint);
+        this->pts->push_back(smalestPoint);
+        this->pts->push_back(*(srcCopy.begin()));
+        this->pts->push_back(*(srcCopy.begin() + 1));
 
-			//for_each(this->pts->begin(), this->pts->end(), print);
-			//cout << endl;
+        Point nextPoint;
+        Point prevPoint;
+        vector<Point>::iterator jt;
+        for (it = srcCopy.begin() + 2; it != srcCopy.end(); it++) {
+            currentPoint = *it;
 
-			//проходим по точкам назад пока не встретим нормальную ситуацию
-			prevPoint = currentPoint;
-			for (jt = this->pts->begin() + this->pts->size() - 2; jt != this->pts->begin(); jt--) {
-				currentPoint = *jt;
-				nextPoint = *(jt - 1);
+            this->pts->push_back(currentPoint);
 
-				//print(nextPoint);
-				//print(currentPoint);
-				//print(prevPoint);
+            //for_each(this->pts->begin(), this->pts->end(), print);
+            //cout << endl;
 
-				if (determinantSignum(nextPoint, currentPoint, prevPoint)) {
-					this->pts->erase(jt);
-					//cout << "deleted" << endl << endl;
-				} else {
-					//cout << endl;
-					break;
-				}
-			}
-		}
-	}
+            //проходим по точкам назад пока не встретим нормальную ситуацию
+            prevPoint = currentPoint;
+            for (jt = this->pts->begin() + this->pts->size() - 2; jt != this->pts->begin(); jt--) {
+                currentPoint = *jt;
+                nextPoint = *(jt - 1);
+
+                //print(nextPoint);
+                //print(currentPoint);
+                //print(prevPoint);
+
+                if (determinantSignum(nextPoint, currentPoint, prevPoint)) {
+                    this->pts->erase(jt);
+                    //cout << "deleted" << endl << endl;
+                } else {
+                    //cout << endl;
+                    break;
+                }
+            }
+        }
+    }
 }

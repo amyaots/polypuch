@@ -3,8 +3,8 @@ $(EXAMPLE_8_NAME): index.o
 	../../../../src/examples/SimpleSegmentsAndBeam/index.o \
 	-L../../../../src/libs/Render -l$(RENDER_LIB_SHORT_NAME) \
 	-L../../../../src/libs/Polygon -l$(POLYGON_LIB_SHORT_NAME) \
-	-L../../../../src/libs/SDL -l$(DRAW_LIB_SHORT_NAME) \
 	-L../../../../src/libs/Segments -l$(SEGMENTS_LIB_SHORT_NAME) \
+	-L../../../../src/libs/SDL -l$(DRAW_LIB_SHORT_NAME) \
 	$(SDL_LIBS)
 
 	$(STRIP) $@

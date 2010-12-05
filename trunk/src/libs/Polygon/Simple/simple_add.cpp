@@ -4,18 +4,6 @@ using namespace segments;
 
 namespace polygon {
 
-	Simple::Simple(const vector<Point> &pts) {
-		this->pts = new vector<Point > ();
-		vector<Point>::const_iterator it;
-		for (it = pts.begin(); it != pts.end(); it++) {
-			vector<Point>::iterator findit;
-			findit = find(this->pts->begin(), this->pts->end(), *it);
-			if (findit == this->pts->end()) {
-				this->add(*it);
-			}
-		}
-	}
-
 	bool Simple::add(const Point &A) {
 		if(this->pts->size() < 3) {
 			this->pts->push_back(A);

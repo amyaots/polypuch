@@ -2,8 +2,11 @@
 
 namespace polygon {
 
-	Convex::Convex(const vector<Point> &src) {
-		this->pts = new vector<Point>;
-		this->graham(src);
-	}
+    Convex::Convex(const vector<Point> &src) {
+        this->graham(src);
+    }
+
+    Convex::~Convex() {
+        this->~Simple();
+    }
 }

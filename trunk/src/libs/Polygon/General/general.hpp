@@ -1,5 +1,5 @@
-#ifndef GENERAL_HPP
-#define	GENERAL_HPP
+#ifndef POLYGON_GENERAL_HPP
+#define	POLYGON_GENERAL_HPP
 
 #include <list>
 #include <vector>
@@ -26,12 +26,13 @@ namespace polygon {
         General();
         General(const vector<Point> &pts);
         General(const General &obj);
-        ~General();
+        virtual ~General();
 
         virtual Ui32 getSize() const;
 
         virtual bool add(const Point &p);
         virtual void insert(const Point &p, Pi index);
+        virtual bool have(const Point &p) const;
 
         const General & operator =(const General &obj);
         const General operator +(const General &obj) const;

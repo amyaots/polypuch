@@ -1,4 +1,4 @@
-convex.a: convex.o convex_add.o convex_graham.o convex_have.o
+convex.a: convex.o convex_graham.o convex_add.o convex_have.o
 	$(AR) $@ $^
 
 convex.o: convex.cpp

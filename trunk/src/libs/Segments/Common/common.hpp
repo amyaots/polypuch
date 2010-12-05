@@ -7,17 +7,18 @@ using namespace polygon;
 #include <sstream>
 
 namespace segments {
-    
+
     //пересечение отрезков
     bool segmentsIntersect(
-        const Point &a,
-        const Point &b,
-        const Point &c,
-        const Point &d,
-        Point &intersection
-    );
+            const Point &a,
+            const Point &b,
+            const Point &c,
+            const Point &d,
+            Point &intersection
+            );
 
     //если отрезки совпадают
+
     class SegmentsEquals : public exception {
     private:
         string exceptionString;
@@ -25,11 +26,13 @@ namespace segments {
     public:
         SegmentsEquals(string);
 
-        virtual ~SegmentsEquals() throw () {};
+        virtual ~SegmentsEquals() throw () {
+        };
         virtual const char * what() const throw ();
     };
 
     //если передали не отрезки
+
     class NotSegment : public exception {
     private:
         string exceptionString;
@@ -37,7 +40,8 @@ namespace segments {
     public:
         NotSegment(string);
 
-        virtual ~NotSegment() throw () {};
+        virtual ~NotSegment() throw () {
+        };
         virtual const char * what() const throw ();
     };
 }

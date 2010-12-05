@@ -33,6 +33,7 @@ namespace segments {
         General() {
         }
         General(const vector<Segment> &);
+        virtual ~General() {}
 
         virtual bool add(const Point &a, const Point &b);
         virtual bool add(const Segment &s);
