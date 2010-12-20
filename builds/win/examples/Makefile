@@ -31,6 +31,18 @@ $(EXAMPLE_10_NAME):
 $(EXAMPLE_11_NAME):
 	$(MAKE) -C GeneralCurvesErmit $(EXAMPLE_11_NAME)
 
+$(EXAMPLE_12_NAME):
+	$(MAKE) -C ConvexPointConstructorJarvis $(EXAMPLE_12_NAME)
+
+$(EXAMPLE_13_NAME):
+	$(MAKE) -C ConvexIntersect $(EXAMPLE_13_NAME)
+
+$(EXAMPLE_14_NAME):
+	$(MAKE) -C GeneralCurvesBezier $(EXAMPLE_14_NAME)
+
+$(EXAMPLE_15_NAME):
+	$(MAKE) -C GeneralCurvesBezierFire $(EXAMPLE_15_NAME)
+
 clean:
 	$(MAKE) -C SimplePointAdder clean
 	$(MAKE) -C SimplePointConstructor clean
@@ -43,3 +55,7 @@ clean:
 	$(MAKE) -C GeneralPointInside clean
 	$(MAKE) -C GeneralCurvesGeneral clean
 	$(MAKE) -C GeneralCurvesErmit clean
+	$(MAKE) -C ConvexPointConstructorJarvis clean
+	$(MAKE) -C ConvexIntersect clean
+	$(MAKE) -C GeneralCurvesBezier clean
+	$(MAKE) -C GeneralCurvesBezierFire clean

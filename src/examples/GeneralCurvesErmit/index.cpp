@@ -94,6 +94,7 @@ int main(int argc, char *argv[]) {
 	srand(time(NULL));
 	Point firstPoint, secondPoint, firstVector, secondVector;
 	go = true;
+	curve::Ermit curve;
 	while (go) {
 		if (SDL_PollEvent(mainEventPointer)) {
 			if (mainEventPointer->type == SDL_QUIT) {
@@ -118,8 +119,6 @@ int main(int argc, char *argv[]) {
 
 			secondVector.first = SQUARE_MARGIN + rand() % (SCREEN_WIDTH - 2 * SQUARE_MARGIN);
 			secondVector.second = SQUARE_MARGIN + rand() % (SCREEN_HEIGHT - 2 * SQUARE_MARGIN);
-
-			curve::Ermit curve;
 
 			curve.approximate(firstPoint, secondPoint, firstVector, secondVector, 2 * (SCREEN_WIDTH + SCREEN_HEIGHT));
 			if(curves->add(curve)) {

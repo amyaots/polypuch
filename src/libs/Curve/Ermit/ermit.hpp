@@ -9,7 +9,6 @@ namespace curve {
     public:
 
         Ermit() : General() {}
-        ~Ermit();
 
         void approximate(
                 const Point &start,

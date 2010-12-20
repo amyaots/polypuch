@@ -1,15 +1,11 @@
 #include "ermit.hpp"
 
-#include "cmath"
+#include <cmath>
 
 #include "../../SDL/Pixel/pixel.hpp"
 using namespace sdl;
 
 namespace curve {
-
-	Ermit::~Ermit() {
-		this->~General();
-	}
 
 	inline double getAlpha(double t) {
 		return 1 - 3 * t * t + 2 * t * t * t;
@@ -38,6 +34,7 @@ namespace curve {
 			) {
 
 		this->pts->clear();
+		this->pts->push_back(start);
 
 		Pi startX = start.first;
 		Pi startY = start.second;
@@ -51,25 +48,14 @@ namespace curve {
 
 		while (t <= 1) {
 			Point currentPoint;
+			t += step;
 
 			currentPoint.first = round(getAlpha(t) * startX + getBeta(t) * endX + getGamma(t) * startDirection.first + getDelta(t) * endDirection.first);
 			currentPoint.second = round(getAlpha(t) * startY + getBeta(t) * endY + getGamma(t) * startDirection.second + getDelta(t) * endDirection.second);
 
-			vector<Point>::const_iterator it;
-			Ui32 k;
-			Ui32 size = this->pts->size();
-			bool add = true;
-			for (k = 0, it = this->pts->begin() + size - 1; k < size; it--, k++) {
-				if (*it == currentPoint) {
-					add = false;
-					break;
-				}
-			}
-
-			if (add) {
+			if (*(this->pts->begin() + this->pts->size() - 1) != currentPoint) {
 				this->pts->push_back(currentPoint);
 			}
-			t += step;
 		}
 	}
 }

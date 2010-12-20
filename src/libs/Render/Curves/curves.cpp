@@ -31,6 +31,19 @@ namespace render {
 			}
 		}
 
+		vector<pair<polygon::Point, PointOptions *> >::const_iterator jt;
+		pair<polygon::Point, PointOptions *> currentPointPair;
+		for (jt = this->points.begin(); jt != this->points.end(); jt++) {
+			currentPointPair = *jt;
+			drawCircle(
+					this->screen,
+					currentPointPair.first.first,
+					currentPointPair.first.second,
+					currentPointPair.second->pointColor,
+					currentPointPair.second->pointRadius
+					);
+		}
+
 		Sulock(this->screen);
 
 		SDL_Flip(this->screen);
@@ -38,5 +51,9 @@ namespace render {
 
 	void Curves::add(curves::General *obj, CurveOptions *opt) {
 		this->curves.push_back(pair<curves::General *, CurveOptions *> (obj, opt));
+	}
+
+	void Curves::add(polygon::Point p, PointOptions *opt) {
+		this->points.push_back(pair<polygon::Point, PointOptions *> (p, opt));
 	}
 }
