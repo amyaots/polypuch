@@ -20,15 +20,22 @@ namespace render {
         Ui32 curveColor;
     };
 
+    struct PointOptions{
+        Ui32 pointColor;
+        Ui16 pointRadius;
+    };
+
     class Curves : public General{
     protected:
         vector<pair<curves::General *, CurveOptions *> > curves;
+        vector<pair<polygon::Point, PointOptions *> > points;
 
     public:
         Curves(Ui16 width, Ui16 height, Ui16 bitPerPixel) : General(width, height, bitPerPixel) {};
         ~Curves();
 
         void add(curves::General *obj, CurveOptions *opt);
+        void add(polygon::Point p, PointOptions *opt);
         
         void reDraw() const;
     };

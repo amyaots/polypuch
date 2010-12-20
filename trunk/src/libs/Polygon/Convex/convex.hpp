@@ -13,19 +13,27 @@ namespace polygon {
 
     typedef unordered_map<f32, Point> AnglePoint;
 
+    enum ConvexSHellAlgo {
+        GRAHAM,
+        JARVIS
+    };
+
     class Convex : public Simple {
     public:
 
         Convex() : Simple() {
         }
         ~Convex();
-        Convex(const vector<Point> &src);
+        Convex(const vector<Point> &src, const ConvexSHellAlgo &algo);
 
         bool add(const Point &pts);
         bool have(const Point &p) const;
+        bool getSegment(const Point &inside, const Point &outside, Point &start, Point &end) const;
+        Convex intersect(const Convex &obj) const;
 
     protected:
         void graham(const vector<Point> &src);
+        void jarvis(const vector<Point> &src);
     };
 }
 

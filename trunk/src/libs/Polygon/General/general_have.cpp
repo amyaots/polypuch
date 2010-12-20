@@ -106,8 +106,6 @@ namespace polygon {
 			octanPrev = octanNext;
 		}
 
-		cout << sum << endl;
-
 		if (sum == 8 || sum == -8) {
 			return true;
 		} else {

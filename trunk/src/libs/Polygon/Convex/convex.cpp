@@ -2,8 +2,16 @@
 
 namespace polygon {
 
-    Convex::Convex(const vector<Point> &src) {
-        this->graham(src);
+    Convex::Convex(const vector<Point> &src, const ConvexSHellAlgo &algo) {
+		switch(algo) {
+			case GRAHAM:
+				this->graham(src);
+				break;
+
+			case JARVIS:
+				this->jarvis(src);
+				break;
+		}
     }
 
     Convex::~Convex() {

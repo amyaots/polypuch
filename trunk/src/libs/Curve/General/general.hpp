@@ -29,7 +29,7 @@ namespace curve {
                 Ui32 curveColor
                 ) const;
 
-        //аппроксимация кривой по некоторому принципу с использованием control точек
+        //аппроксимация кривой по некоторому принципу с использованием
         virtual void approximate(const Point &start, const Point &end);
     };
 }

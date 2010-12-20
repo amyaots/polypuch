@@ -1,0 +1,7 @@
+usage:
+	path/to/binary
+	count_points          (default 20)
+	visualization_delay   (default 0)
+	point_radius          (default 3)
+	segment_width         (default 2)
+Set 480x360:32 video

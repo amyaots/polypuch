@@ -6,6 +6,14 @@ usage:
 	segment_width                  (default 2)
 	check_visualization_delay      (default 500)
 Set 480x360:32 video
+-8
+8
+8
+0
+0
+-8
 0
 0
 0
+-8
+-8

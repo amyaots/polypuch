@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
 	 * */
 
 	//добавим полигон
-	Convex *polyConvex = new Convex(random_points);
+	Convex *polyConvex = new Convex(random_points, polygon::GRAHAM);
 
 	PolygonOptions *polyConvexOpt = new PolygonOptions();
 	polyConvexOpt->pointColor = green;

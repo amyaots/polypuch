@@ -1,0 +1,7 @@
+usage:
+	path/to/binary
+	count_curves                   (default 5)
+	count_points                   (default 16)
+	creation_visualization_delay   (default 300)
+	point_radius                   (default 3)
+Set 480x360:32 video
