@@ -87,7 +87,6 @@ namespace polygon {
 
         //посчитаем углы
         Point currentPoint;
-        Si16 dX;
         for (it = srcCopy.begin(); it != srcCopy.end(); it++) {
             currentPoint = *it;
             angles[currentPoint] = getAngle(smalestPoint, currentPoint);
@@ -131,7 +130,7 @@ namespace polygon {
                 //print(prevPoint);
 
                 if (determinantSignum(nextPoint, currentPoint, prevPoint)) {
-                    this->pts->erase(jt);
+                    jt = this->pts->erase(jt);
                     //cout << "deleted" << endl << endl;
                 } else {
                     //cout << endl;

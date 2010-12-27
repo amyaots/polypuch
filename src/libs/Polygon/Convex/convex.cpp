@@ -11,6 +11,10 @@ namespace polygon {
 			case JARVIS:
 				this->jarvis(src);
 				break;
+
+			case HOARE:
+				this->hoare(src);
+				break;
 		}
     }
 
