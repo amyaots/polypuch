@@ -14,3 +14,4 @@ clean:
 	$(MAKE) -C ConvexIntersect clean
 	$(MAKE) -C GeneralCurvesBezier clean
 	$(MAKE) -C GeneralCurvesBezierFire clean
+	$(MAKE) -C ConvexPointConstructorHoare clean

@@ -1,0 +1,194 @@
+usage:
+	path/to/binary
+	count_points          (default 20)
+	visualization_delay   (default 0)
+	point_radius          (default 3)
+	segment_width         (default 2)
+Set 480x360:32 video
+8, 128
+445, 149
+
+first
+
+147, 5
+63, 115
+37, 63
+139, 121
+32, 20
+203, 22
+162, 29
+
+maxPoint
+147, 5
+
+erase points
+aMaxRotate 0
+bMaxRotate 0
+aBRotate 0
+63, 115
+aMaxRotate 1
+bMaxRotate 0
+aBRotate 0
+aMaxRotate 0
+bMaxRotate 0
+aBRotate 0
+139, 121
+aMaxRotate 1
+bMaxRotate 0
+aBRotate 0
+aMaxRotate 0
+bMaxRotate 1
+aBRotate 0
+aMaxRotate 0
+bMaxRotate 0
+aBRotate 0
+162, 29
+
+first
+
+37, 63
+32, 20
+
+maxPoint
+32, 20
+
+erase points
+aMaxRotate 0
+bMaxRotate 0
+aBRotate 0
+37, 63
+
+first clear
+
+second clear
+
+second
+
+203, 22
+
+maxPoint
+203, 22
+
+erase points
+
+first clear
+
+second clear
+
+second
+
+219, 197
+180, 203
+271, 237
+276, 161
+65, 202
+63, 305
+402, 352
+127, 217
+217, 340
+98, 162
+137, 248
+
+maxPoint
+402, 352
+
+erase points
+aMaxRotate 1
+bMaxRotate 1
+aBRotate 1
+219, 197
+aMaxRotate 1
+bMaxRotate 1
+aBRotate 1
+180, 203
+aMaxRotate 1
+bMaxRotate 1
+aBRotate 1
+271, 237
+aMaxRotate 1
+bMaxRotate 1
+aBRotate 1
+276, 161
+aMaxRotate 0
+bMaxRotate 1
+aBRotate 1
+aMaxRotate 0
+bMaxRotate 1
+aBRotate 1
+aMaxRotate 0
+bMaxRotate 1
+aBRotate 1
+aMaxRotate 0
+bMaxRotate 1
+aBRotate 1
+aMaxRotate 1
+bMaxRotate 1
+aBRotate 1
+98, 162
+aMaxRotate 0
+bMaxRotate 1
+aBRotate 1
+
+first
+
+65, 202
+63, 305
+127, 217
+217, 340
+137, 248
+
+maxPoint
+63, 305
+
+erase points
+aMaxRotate 1
+bMaxRotate 1
+aBRotate 1
+65, 202
+aMaxRotate 1
+bMaxRotate 1
+aBRotate 1
+127, 217
+aMaxRotate 1
+bMaxRotate 0
+aBRotate 1
+aMaxRotate 1
+bMaxRotate 1
+aBRotate 1
+137, 248
+
+first clear
+
+second
+
+217, 340
+
+maxPoint
+217, 340
+
+erase points
+
+first clear
+
+second clear
+
+second clear
+
+[217, 340] = 1.01435
+[203, 22] = -0.54359
+[8, 128] = -3.40282e+038
+[32, 20] = -4.5
+[147, 5] = -0.884892
+[402, 352] = 0.568528
+[445, 149] = 0.0480549
+[63, 305] = 3.21818
+
+[217, 340] = 1.01435
+[203, 22] = -0.54359
+[8, 128] = -3.40282e+038
+[32, 20] = -4.5
+[147, 5] = -0.884892
+[402, 352] = 0.568528
+[445, 149] = 0.0480549
+[63, 305] = 3.21818
+

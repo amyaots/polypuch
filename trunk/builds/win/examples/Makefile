@@ -42,6 +42,9 @@ $(EXAMPLE_14_NAME):
 
 $(EXAMPLE_15_NAME):
 	$(MAKE) -C GeneralCurvesBezierFire $(EXAMPLE_15_NAME)
+	
+$(EXAMPLE_16_NAME):
+	$(MAKE) -C ConvexPointConstructorHoare $(EXAMPLE_16_NAME)
 
 clean:
 	$(MAKE) -C SimplePointAdder clean
@@ -59,3 +62,4 @@ clean:
 	$(MAKE) -C ConvexIntersect clean
 	$(MAKE) -C GeneralCurvesBezier clean
 	$(MAKE) -C GeneralCurvesBezierFire clean
+	$(MAKE) -C ConvexPointConstructorHoare clean

@@ -15,7 +15,8 @@ namespace polygon {
 
     enum ConvexSHellAlgo {
         GRAHAM,
-        JARVIS
+        JARVIS,
+        HOARE
     };
 
     class Convex : public Simple {
@@ -34,6 +35,7 @@ namespace polygon {
     protected:
         void graham(const vector<Point> &src);
         void jarvis(const vector<Point> &src);
+        void hoare(const vector<Point> &src);
     };
 }
 
